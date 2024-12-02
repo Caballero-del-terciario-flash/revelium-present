@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="nav">
+	<div class="dropdown">
+		<button class="dropbtn">Registrate</button>
+		<div class="dropdown-content">
+			<a href="index.php">Inicio</a><br>
+			<a href="profile.php">Perfil</a><br>
+			<a href="buffer.php">Ir a clase</a>
+		</div>
+	</div>
+	</div>
+    <form action="registrar.php" method="POST">
+        <select id="type" name="type" required>
+            <option value="student">Estudiante</option>
+            <option value="teacher">Profesor</option>
+        </select><br>
+        <input type="text" id="name" name="name" placeholder="Nombre"required><br>
+        <input type="text" id="surname" name="surname" placeholder="Apellido"required><br>
+        <input type="number" id="dni" name="dni" placeholder="DNI"required><br>
+        <input type="email" id="mail" name="mail" placeholder="Tu mail del terciario"required><br>
+        <input type="password" id="password" name="password" placeholder="Contraseña"required><br>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Esa misma contraseña de antes"required><br>
+        <!-- Campos adicionales si es estudiante -->
+        <div id="cosas_de_estudiantes" style="display:block;">
+            <select id="career" name="career" required>
+                <option value="DS">Desarrollo de Software</option>
+                <option value="ITI">Infraestructura de Tecnología de la Información</option>
+                <option value="AF">Analista Funcional  de Sistemas Informáticos</option>
+            </select><br>
+
+            <input type="number" id="year" name="year" placeholder="Año" min="1" max="3"><br>
+        </div>
+
+        <br><button type="submit">Registrar</button>
+    </form>
+
+    <script>
+        // Mostrar u ocultar los campos adicionales para estudiantes
+        document.getElementById('type').addEventListener('change', function() {
+            var type = this.value;
+            var camposEstudiante = document.getElementById('cosas_de_estudiantes');
+            if (type == 'student') {
+                camposEstudiante.style.display = 'block';
+            } else {
+                camposEstudiante.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

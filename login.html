@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada Épica</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="nav">
+	<div class="dropdown">
+		<button class="dropbtn">Login</button>
+		<div class="dropdown-content">
+			<a href="index.php">Inicio</a><br>
+			<a href="profile.php">Perfil</a><br>
+			<a href="buffer.php">Ir a clase</a>
+		</div>
+	</div>
+	</div>
+<div class="center">
+<form action="login.php" method="POST">
+	<select id="type" name="type" required>
+		<option value="student">Estudiante</option>
+		<option value="teacher">Profesor</option>
+	</select><br>
+
+	<input type="email" name="mail" id="mail" placeholder="Tu mail del terciario" required><br>
+
+	<input type="password" name="password" id="password" placeholder="Contraseña" required><br><br>
+
+	<button type="submit">Iniciar Sesión</button>
+</form>
+</div>
+</body>
+</html>

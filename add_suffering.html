@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar una materia</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="nav">
+	<div class="dropdown">
+		<button class="dropbtn">Nueva Materia</button>
+		<div class="dropdown-content">
+			<a href="index.php">Inicio</a><br>
+			<a href="profile.php">Perfil</a><br>
+			<a href="buffer.php">Ir a clase</a>
+		</div>
+	</div>
+	</div>
+<form action="agregar_materia.php" method="POST">
+    <input type="text" name="nombre" id="nombre" required><br>
+	<input type="email" name="mail" placeholder="Mail del profe de esta materia" required><br>
+	<input type="number" name="year" min="1" max="3" placeholder="Año de la materia" required"><br>
+	<select id="career" name="career" required>
+		<option value="DS">Desarrollo de Software</option>
+		<option value="ITI">Infraestructura de Tecnología de la Información</option>
+		<option value="AF">Analista Funcional  de Sistemas Informáticos</option>
+	</select><br>
+
+    <input type="submit" value="Agregar materia">
+</form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortadelear Usuario</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="nav">
+	<div class="dropdown">
+		<button class="dropbtn">Mortadela</button>
+		<div class="dropdown-content">
+			<a href="index.php">Inicio</a><br>
+			<a href="profile.php">Perfil</a><br>
+			<a href="buffer.php">Ir a clase</a>
+		</div>
+	</div>
+	</div>
+    <form action="killuser.php" method="POST">
+        <select id="type" name="type" required>
+            <option value="students">Estudiante</option>
+            <option value="teachers">Profesor</option>
+        </select><br>
+        <input type="email" id="mail" name="mail" placeholder="Tu mail del terciario"required><br>
+        <input type="password" id="password" name="password" placeholder="Contraseña"required><br>
+        <br><button type="submit">Mortadelear cuenta</button>
+    </form>
+</body>
+</html>
