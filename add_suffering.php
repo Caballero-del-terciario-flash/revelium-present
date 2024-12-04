@@ -20,7 +20,6 @@
 </body>
 </html>
 <?php
-// Conectar a la base de datos
 $servername = "localhost";
 $username = "usuario";
 $password = "contraseña";
@@ -35,7 +34,6 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
 	$mail = $_POST['mail'];
@@ -49,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$id = $stmt->fetchColumn();
 
-    // Insertar la nueva materia en la base de datos
     $sql = "INSERT INTO subject (subject_name, teacher_id, year, career) VALUES ($name, $id, $year, $career)";
     
     if ($conn->query($sql) === TRUE) {

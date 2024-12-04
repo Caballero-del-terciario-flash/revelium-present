@@ -37,23 +37,19 @@ $_SESSION['subject_id'] = $choice;
     </p>
 
     <script>
-        // Conexión al servidor Node.js
-        const subject_id = "<?php echo $_SESSION['subject_id']; ?>"; // Asumimos que ya tienes subject_id en la sesión del profesor
-        const socket = io('http://localhost:3000'); // Cambia localhost por la IP si estás en otro dispositivo
+        const subject_id = "<?php echo $_SESSION['subject_id']; ?>"; 
+        const socket = io('http://localhost:3000'); 
 
-        // Escuchar actualizaciones del código
         socket.on('codeUpdated', (data) => {
-            // Actualizar el código en el DOM
             document.getElementById('big-smoke').textContent = data.code;
 
-            // Enviar los datos al servidor, incluyendo subject_id
-            fetch('http://localhost:3000/start-class', { // Asegúrate de que la URL apunte al servidor adecuado
+            fetch('http://localhost:3000/start-class', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    subject_id: subject_id // Enviar el subject_id de la materia
+                    subject_id: subject_id 
                 })
             })
             .then(response => response.json())

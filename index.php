@@ -21,7 +21,6 @@
 <?php
 session_start();
 
-// Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -32,18 +31,16 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Determinar si el usuario es estudiante o profesor
 if (!isset ($_SESSION['id'])){
 	die("Me parece que no iniciaste sesión. Andate al perfil a ver qué onda.");
 }
-$user_type = $_SESSION['type']; // Puede ser 'student' o 'teacher'
-$user_id = $_SESSION['id']; // ID del usuario logueado
+$user_type = $_SESSION['type'];
+$user_id = $_SESSION['id'];
 $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 echo "$name $surname<br>";
 
 if ($user_type == 'student') {
-    // Mostrar asistencias del estudiante
     $query = "
         SELECT 
             s.subject_name, 
@@ -71,7 +68,6 @@ if ($user_type == 'student') {
         echo $row['attendance_details'] . "<br>";
     }
 } elseif ($user_type == 'teacher') {
-    // Mostrar asistencias de los estudiantes para cada materia
 $teacher_id = $_SESSION['id'];
 $query = "
     SELECT 
@@ -91,16 +87,14 @@ $stmt = $conn->prepare($query);
 if ($stmt === false) {
     die("Error al preparar la consulta: " . $conn->error);
 }
-$stmt->bind_param("i", $teacher_id);  // Vincula el parámetro (teacher_id)
+$stmt->bind_param("i", $teacher_id);  
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Verificar si hay resultados
 if ($result->num_rows > 0) {
     $current_subject = null;
     $attendance_by_subject = [];
 
-    // Agrupar las asistencias por materia
     while ($row = $result->fetch_assoc()) {
         $subject_name = $row['subject_name'];
         $attendance_date = $row['attendance_date'];
@@ -108,12 +102,10 @@ if ($result->num_rows > 0) {
         $student_surname = $row['student_surname'];
         $attendance_state = ($row['attendance_state'] === 'presente') ? 'Presente' : 'Ausente';
 
-        // Si la materia no está en el array, agregarla
         if (!isset($attendance_by_subject[$subject_name])) {
             $attendance_by_subject[$subject_name] = [];
         }
 
-        // Agregar la asistencia al grupo de la materia
         $attendance_by_subject[$subject_name][] = [
             'date' => $attendance_date,
             'student_name' => $student_name,
@@ -122,25 +114,20 @@ if ($result->num_rows > 0) {
         ];
     }
 
-    // Mostrar las asistencias por materia y fecha
     foreach ($attendance_by_subject as $subject => $attendances) {
         echo "<br>Materia: $subject<br>";
 
         $current_date = null;
         foreach ($attendances as $attendance) {
             if ($current_date !== $attendance['date']) {
-                // Si cambiamos de fecha, imprimir la nueva fecha
                 if ($current_date !== null) {
                 }
 
-                // Actualizar la fecha actual
                 $current_date = $attendance['date'];
 
-                // Imprimir la nueva fecha
                 echo "<br>Fecha: " . $attendance['date'] . "<br><br>";
             }
 
-            // Mostrar el nombre y estado de cada estudiante
             echo $attendance['student_name'] . " " . $attendance['student_surname'] . " - " . $attendance['attendance_state'] . "<br>";
         }
 
@@ -149,7 +136,6 @@ if ($result->num_rows > 0) {
     echo "No se encontraron registros.";
 }
 }
-// Cerrar la consulta y la conexión
 $stmt->close();
 $conn->close();
 ?>

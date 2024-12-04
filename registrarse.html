@@ -28,7 +28,6 @@
         <input type="email" id="mail" name="mail" placeholder="Tu mail del terciario"required><br>
         <input type="password" id="password" name="password" placeholder="Contraseña"required><br>
         <input type="password" id="confirm_password" name="confirm_password" placeholder="Esa misma contraseña de antes"required><br>
-        <!-- Campos adicionales si es estudiante -->
         <div id="cosas_de_estudiantes" style="display:block;">
             <select id="career" name="career" required>
                 <option value="DS">Desarrollo de Software</option>
@@ -43,7 +42,6 @@
     </form>
 
     <script>
-        // Mostrar u ocultar los campos adicionales para estudiantes
         document.getElementById('type').addEventListener('change', function() {
             var type = this.value;
             var camposEstudiante = document.getElementById('cosas_de_estudiantes');

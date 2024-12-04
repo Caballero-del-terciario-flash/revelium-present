@@ -20,9 +20,8 @@ $words= ['crack','maestro','guerrero','mastodonte','bestia','caballero de la noc
 $word= array_rand($words);
 $randomword= $words[$word];
 
-session_start(); // Inicia la sesión
+session_start();
 
-// Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -34,12 +33,10 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Captura los datos del formulario
 $mail = $_POST['mail'];
 $password_ingresada = $_POST['password'];
 $type = $_POST['type'];
 
-// Consulta para verificar el usuario
 $stmt = $conn->prepare("SELECT ".$type."_id, name, surname, DNI, password, mail FROM ".$type."s WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
@@ -48,9 +45,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
-    // Verifica la contraseña
     if (password_verify($password_ingresada, $row['password'])) {
-        // Guarda la ID y el tipo de cuenta en la sesión
         $_SESSION['id'] = $row[$type.'_id'];
         $_SESSION['type'] = $type;
 		$_SESSION['name'] = $row['name'];
@@ -59,7 +54,6 @@ if ($result->num_rows > 0) {
 		$_SESSION['mail'] = $row['mail'];
 
         echo "Sesión iniciada como ".$_SESSION['name'].' '.$_SESSION['surname'].".<br>Que onda $randomword? Todo piola?<br><br>".htmlspecialchars($mail);
-        //header("Location: inicio.php");
         exit();
     } else {
         echo "Le pifiaste a la contraseña.";

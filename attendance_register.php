@@ -4,7 +4,6 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,12 +11,10 @@ $dbname = "revelium_present";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
 if ($conn->connect_error) {
     die(json_encode(["error" => "Error de conexión: " . $conn->connect_error]));
 }
 
-// Capturar datos enviados desde Node.js
 $data = json_decode(file_get_contents('php://input'), true);
 $student_id = $data['student_id'] ?? null;
 
@@ -44,5 +41,4 @@ if ($student_id) {
 }
 
 $conn->close();
-//header(location:'show_code.php');
 ?>

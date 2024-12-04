@@ -29,7 +29,7 @@ session_start();
     <script>
 document.getElementById('submit_code').addEventListener('click', function() {
     const code = document.getElementById('attendance_code').value;
-    const student_id = "<?php echo $_SESSION['id']; ?>"; // Simula un ID de estudiante, reemplázalo con tu lógica
+    const student_id = "<?php echo $_SESSION['id']; ?>";
 
     fetch('http://localhost:3000/submit-code', {
         method: 'POST',
